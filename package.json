@@ -1,0 +1,41 @@
+{
+  "name": "audioelectron",
+  "version": "0.0.1-a",
+  "description": "Electron audio player",
+  "author" : {
+    "name" : "Alex",
+    "email" : "a.gvrnsk@gmail.com"
+  },  
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies" : {
+    "howler": "latest",
+    "requirejs": "latest",
+    "requirejs-text": "latest"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Binarium",
+    "electron"
+  ],
+  "devDependencies": {
+    "electron": "latest",
+    "electron-packager" : "latest",
+    "gulp": "latest",
+    "gulp-requirejs-optimize": "latest",
+    "gulp-util": "latest",
+    "gulp-rename": "latest",
+    "confirm-simple": "latest",
+    "fs-readdir-recursive": "latest",
+    "minimist": "latest",
+    "fs-extra": "latest",
+    "jsonfile": "latest",
+    "colors": "latest",
+    "directory-tree": "latest",
+    "uglify-js": "latest",
+    "electron": "latest",
+    "electron-packager": "latest"
+  }
+}
