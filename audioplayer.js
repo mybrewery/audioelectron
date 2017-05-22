@@ -2,7 +2,8 @@ console.log(true);
 
 requirejs.config({
 	paths: {
-		howler: "../node_modules/howler/dist/howler"
+		howler: "../node_modules/howler/dist/howler",
+		file: '../node_modules/requirejs-text/text',
 	},
 	baseUrl: "src"
 
