@@ -17,6 +17,21 @@ define([
 		/*Current*/
 		this.current = {
 			element: ui.html2DOM(currentHTML),
+			setProgress: function(value) {
+				ui.forEach("#line", function(element){
+					element.style.width = value + "%";
+				}, this);
+			},
+
+			setInfo: function(artist, title) {
+				ui.forEach(".artist", function(element){
+					element.innerHTML = artist;
+				}, this);
+
+				ui.forEach(".title", function(element){
+					element.innerHTML = title;
+				}, this);
+			}
 		};
 
 
@@ -24,10 +39,12 @@ define([
 			element.appendChild(this.current.element);
 		}, this);
 
+
+		this.current.setProgress(25);
+		this.current.setInfo("Unknown", "Track 29");
 	};
 	
 	Player.prototype = {
-
 	};
 
 	return Player;
