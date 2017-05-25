@@ -15,8 +15,10 @@ define([], function() {
 
 		},
 
-		forEach: function(selector, callback, context){
-			var elements = document.querySelectorAll(selector);
+		forEach: function(selector, callback, context, root){
+			root = root || document;
+
+			var elements = root.querySelectorAll(selector);
 
 			for(var a = 0; a < elements.length; a++) {
 				callback.call(context, elements[a]);

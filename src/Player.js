@@ -10,6 +10,8 @@ define([
 
 	var ui = new UI;
 	var Player = function(rootElement){
+		var paused = true;
+
 		this.element = ui.html2DOM(playerHTML);
 
 		rootElement.appendChild(this.element);
@@ -31,8 +33,28 @@ define([
 				ui.forEach(".title", function(element){
 					element.innerHTML = title;
 				}, this);
-			}
+			},
+
+			get paused() {
+				return paused;
+			},
+
+			set paused(key) {
+				ui.forEach(".button.play", function(element){
+					!key ? element.classList.add("hidden") : element.classList.remove("hidden"); 
+				}, this, this.element);
+
+				ui.forEach(".button.pause", function(element){
+					key ? element.classList.add("hidden") : element.classList.remove("hidden"); 
+				}, this, this.element);
+
+				paused = key;
+			}	
 		};
+
+		ui.forEach(".button", function(element){
+			element.addEventListener("click", this.onCurrentButtonClick.bind(this, element));
+		}, this, this.current.element);
 
 
 		ui.forEach('#current-placeholder', function(element){
@@ -45,6 +67,27 @@ define([
 	};
 	
 	Player.prototype = {
+		onCurrentButtonClick: function(button){
+			var action = button.getAttribute("data-action");
+
+			switch(action) {
+				case "play": 
+					console.log(action);
+					this.current.paused = !this.current.paused;
+				break;
+				case "prev": 
+
+				break;
+				case "next": 
+
+				break;
+				case "pause": 
+					this.current.paused = !this.current.paused;
+				break;
+
+
+			}
+		}
 	};
 
 	return Player;
