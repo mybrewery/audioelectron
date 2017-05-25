@@ -1,8 +1,6 @@
 "use strict";
 
-define([
-	"file!UI/audio_item.html"
-	], function(audioitemhtml) {
+define([], function() {
 	var UI = function() {
 
 	};
@@ -17,8 +15,12 @@ define([
 
 		},
 
-		createAudioItem: function() {
-			document.body.appendChild(this.html2DOM(audioitemhtml));
+		forEach: function(selector, callback, context){
+			var elements = document.querySelectorAll(selector);
+
+			for(var a = 0; a < elements.length; a++) {
+				callback.call(context, elements[a]);
+			}
 		}
 
 	};

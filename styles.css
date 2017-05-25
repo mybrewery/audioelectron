@@ -1,0 +1,23 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+#player {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+#current-placeholder {
+	height: 200px;
+	background: #d4d4d4;
+}
+
+#list-placeholder {
+	flex-grow: 1;
+	background: #f3f3f3;
+}

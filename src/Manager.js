@@ -3,12 +3,10 @@
 define ([
 	"Loader",
 	"Player",
-	"UI"
-	], function(Loader, Player, UI) {
+	], function(Loader, Player) {
 	var Manager = function() {
 		this.loader = new Loader;
-		this.player = new Player;
-		this.ui = new UI;
+		this.player = new Player(document.body);
 		this.loader.load(this.init.bind(this));
 	};
 
