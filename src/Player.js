@@ -52,10 +52,34 @@ define([
 			}	
 		};
 
+
+		ui.forEach("#progress.button", function(element){
+			element.addEventListener("mousedown", function(evt){
+				element.captured = true;
+
+			}.bind(this));
+		}, this, this.current.element);
+
+		ui.forEach("#progress.button", function(element){
+			window.addEventListener("mouseup", function(evt){
+				element.captured = false;
+			}.bind(this));
+		}, this, this.current.element);
+
+		ui.forEach("#progress.button", function(element){
+			window.addEventListener("mousemove", function(evt){
+				if(element.captured) {
+					var value = (evt.clientX - 25)/element.clientWidth * 100;
+ 					this.current.setProgress(value);
+				}
+			}.bind(this));
+		}, this, this.current.element);
+
+
+
 		ui.forEach(".button", function(element){
 			element.addEventListener("click", this.onCurrentButtonClick.bind(this, element));
 		}, this, this.current.element);
-
 
 		ui.forEach('#current-placeholder', function(element){
 			element.appendChild(this.current.element);
@@ -67,12 +91,11 @@ define([
 	};
 	
 	Player.prototype = {
-		onCurrentButtonClick: function(button){
+		onCurrentButtonClick: function(button, evt){
 			var action = button.getAttribute("data-action");
 
 			switch(action) {
 				case "play": 
-					console.log(action);
 					this.current.paused = !this.current.paused;
 				break;
 				case "prev": 
@@ -84,8 +107,10 @@ define([
 				case "pause": 
 					this.current.paused = !this.current.paused;
 				break;
-
-
+				case "progress":
+ 					var value = (evt.clientX - 25)/button.clientWidth * 100;
+ 					this.current.setProgress(value);
+ 				break;
 			}
 		}
 	};

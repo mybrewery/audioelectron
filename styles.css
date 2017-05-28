@@ -176,12 +176,13 @@ body {
 	position: relative;
 	background: #C2185B;
 	border-radius: 6px; 
-	transition: width 0.5s ease;
+	/*transition: width 0.5s ease;*/
+	cursor: pointer;
 }
 
 .slider {
-	width: 15px;
-	height: 15px;
+	width: 16px;
+	height: 16px;
 	background: #AD1457;
 	border-radius: 50%;
 	position: absolute;
