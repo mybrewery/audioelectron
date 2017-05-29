@@ -2,10 +2,10 @@
 
 define([
 		"UI",
-		"file!Player/current.html",
-		"file!Player/track.html",
-		"file!Player/list.html",
-		"file!Player/player.html"
+		"file!Player/HTML/current.html",
+		"file!Player/HTML/track.html",
+		"file!Player/HTML/list.html",
+		"file!Player/HTML/player.html"
 	], function(UI, currentHTML, trackHTML, listHTML, playerHTML){
 
 	var ui = new UI;
