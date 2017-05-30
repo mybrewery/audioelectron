@@ -23,6 +23,7 @@ body {
 #list-placeholder {
 	flex-grow: 1;
 	background: #f3f3f3;
+	overflow: auto;
 }
 
 #current {
