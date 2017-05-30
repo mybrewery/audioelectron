@@ -5,12 +5,14 @@ define([
 		"file!Player/HTML/current.html",
 		"file!Player/HTML/track.html",
 		"file!Player/HTML/list.html",
-		"file!Player/HTML/player.html"
-	], function(UI, currentHTML, trackHTML, listHTML, playerHTML){
+		"file!Player/HTML/player.html",
+		"Player/Playlist"
+	], function(UI, currentHTML, trackHTML, listHTML, playerHTML, Playlist){
 
 	var ui = new UI;
 	var Player = function(rootElement){
 		var paused = true;
+		var activePlaylist = false;
 
 		this.element = ui.html2DOM(playerHTML);
 
@@ -75,8 +77,46 @@ define([
 			}.bind(this));
 		}, this, this.current.element);
 
+		/*Playlists*/
+		this.playlists = {
+			get active() {
+				return activePlaylist;
+			},
+			set active(name) {
+				activePlaylist = this.content[name];
+				this.updateDOM();
 
+			},
+			content: {},
+			add: function(name, pl) {
+				this.content[name] = pl;
+			},
+			element: ui.html2DOM(listHTML),
+			updateDOM: function() {
+				for(var a = 0, l = this.active.content.length, node, file; a < l; a++) {
+					node = this.element.querySelector(".track.num" + a);
+					file = this.active.content[a];
 
+					if(!node) {
+						node = ui.html2DOM(trackHTML);
+						node.classList.add("num" + a);
+						this.element.appendChild(node);
+					}
+
+					ui.forEach(".caption", function(element){
+						element.innerHTML = file.name; 
+					}, this, node);
+				}
+			}
+		};
+
+		var defaultPlaylist = this.Playlist.fromDir("./music");
+		console.log(defaultPlaylist);
+
+		this.playlists.add("default", defaultPlaylist);
+		this.playlists.active = "default";
+
+		/*Common*/
 		ui.forEach(".button", function(element){
 			element.addEventListener("click", this.onCurrentButtonClick.bind(this, element));
 		}, this, this.current.element);
@@ -85,12 +125,17 @@ define([
 			element.appendChild(this.current.element);
 		}, this);
 
+		ui.forEach('#list-placeholder', function(element){
+			element.appendChild(this.playlists.element);
+		}, this);
+
 
 		this.current.setProgress(25);
 		this.current.setInfo("Unknown", "Track 29");
 	};
 	
 	Player.prototype = {
+		Playlist: Playlist,
 		onCurrentButtonClick: function(button, evt){
 			var action = button.getAttribute("data-action");
 

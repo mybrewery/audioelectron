@@ -193,3 +193,22 @@ body {
 .hidden {
 	display: none!important; 
 }
+
+.track {
+	height: 60px;
+	display: flex;
+    align-items: center;
+    background: white;
+    margin: 5px 0;
+    padding: 0 25px;
+}
+
+.track img {
+	height: 36px;
+    margin-right: 25px;
+    opacity: 0.4;
+}
+
+.track > div {
+	font-weight: bold;
+}
